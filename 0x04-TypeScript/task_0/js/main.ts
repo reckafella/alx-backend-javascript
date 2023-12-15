@@ -1,4 +1,4 @@
-interface Student {
+export interface Student {
   firstName: string;
   lastName: string;
   age: number;
@@ -19,7 +19,7 @@ const student2: Student = {
   location: "Ireland",
 };
 
-const studentList: Student[] = [
+const studentList: Array<Student> = [
   student1,
   student2,
 ];

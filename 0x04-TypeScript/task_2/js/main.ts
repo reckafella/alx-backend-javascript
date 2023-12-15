@@ -1,60 +1,99 @@
-interface Student {
-  firstName: string;
-  lastName: string;
-  age: number;
-  location: string;
+/* Task 5 */
+export interface DirectorInterface {
+  workFromHome(): string;
+  getCoffeeBreak(): string;
+  workDirectorTasks(): string;
 }
 
-const student1: Student = {
-  firstName: "Jack",
-  lastName: "Smith",
-  age: 34,
-  location: "Hong Kong",
-};
 
-const student2: Student = {
-  firstName: "Katherine",
-  lastName: "McGrath",
-  age: 32,
-  location: "Ireland",
-};
+export interface TeacherInterface {
+  workFromHome(): string;
+  getCoffeeBreak(): string;
+  workTeacherTasks(): string;
+}
 
-const studentList: Student[] = [
-  student1,
-  student2,
-];
+export class Director implements DirectorInterface {
+  workFromHome(): string {
+    return `Working from home`;
+  }
+
+  getToWork(): string {
+    return `Getting a coffee break`;
+  }
+
+  getCoffeeBreak(): string {
+    return `Getting a coffee break`;
+  }
+
+  workDirectorTasks(): string {
+    return `Getting to director tasks`;
+  }
+}
 
 
-// Vanilla JavaScript code to render a table and for each
-//    elements in the array, append a new row to the table
-// Each row should contain the first name of the student and the location
-const table = document.createElement("table");
-const headerRow = document.createElement("tr");
+export class Teacher implements TeacherInterface {
+  workFromHome(): string {
+    return `Cannot work from home`;
+  }
 
-const firstNameHeader = document.createElement("th");
-firstNameHeader.textContent = "First Name";
+  getCoffeeBreak(): string {
+    return `Cannot have a break`;
+  }
 
-const locationHeader = document.createElement("th");
-locationHeader.textContent = "Location";
+  workTeacherTasks(): string {
+    return `Getting to work`;
+  }
+}
 
-headerRow.appendChild(firstNameHeader);
-headerRow.appendChild(locationHeader);
 
-table.appendChild(headerRow);
+export function createEmployee(salary: string | number): (Director | Teacher) {
+  if (typeof salary === 'number' && salary < 500) {
+    return new Teacher();
+  }
+  return new Director();
+}
 
-studentList.forEach((student) => {
-  const row = document.createElement("tr");
-  
-  const firstNameCell = document.createElement("td");
-  firstNameCell.textContent = student.firstName;
 
-  const locationCell = document.createElement("td");
-  locationCell.textContent = student.location;
+/* Task 6 */
+/*
+* accepts employee as an argument
+* it will be used as a type predicate and if the employee is a director
+*/
+export function isDirector(employee: (Teacher | Director)): boolean {
+  return (employee instanceof Director);
+}
 
-  row.appendChild(firstNameCell);
-  row.appendChild(locationCell);
 
-  table.appendChild(row);
-});
+/*
+* it accepts employee as an argument
+* if the employee is a Director, it will call workDirectorTasks
+* if the employee is a Teacher, it will call workTeacherTasks
+*/
+export function executeWork(employee: (Teacher | Director)) {
+  if (isDirector(employee)) {
+    const directorInstance = new Director();
+    return directorInstance.workDirectorTasks();
+  }
+  const teacherInstance = new Teacher();
+  return teacherInstance.workTeacherTasks();
+}
 
-document.body.appendChild(table);
+/* Task 7 */
+/*
+* a String literal type named Subjects allowing a variable to have\
+* the value Math or History only. Write a function named teachClass:
+
+* it takes todayClass as an argument
+* it will return the string Teaching Math if todayClass is Math
+* it will return the string Teaching History if todayClass is History
+*/
+export type Subjects = 'Math' | 'History';
+
+export function teachClass(todayClass: Subjects) {
+  if (todayClass === 'Math') {
+    return `Teaching Math`;
+  }
+  if (todayClass === 'History') {
+    return `Teaching History`;
+  }
+}
