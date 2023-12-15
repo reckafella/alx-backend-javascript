@@ -1,60 +1,27 @@
-interface Student {
-  firstName: string;
-  lastName: string;
-  age: number;
-  location: string;
-}
+export const cpp: Subjects.Cpp = new Subjects.Cpp();
+export const java: Subjects.Java = new Subjects.Java();
+export const react: Subjects.React = new Subjects.React();
 
-const student1: Student = {
-  firstName: "Jack",
-  lastName: "Smith",
-  age: 34,
-  location: "Hong Kong",
+export const cTeacher: Subjects.Teacher = {
+  firstName: 'Warren',
+  lastName: 'Clinton',
+  experienceTeachingC: 10,
 };
 
-const student2: Student = {
-  firstName: "Katherine",
-  lastName: "McGrath",
-  age: 32,
-  location: "Ireland",
-};
+/* cpp subject */
+console.log('C++');
+cpp.teacher = cTeacher;
+console.log(cpp.getRequirements());
+console.log(cpp.getAvailableTeacher());
 
-const studentList: Student[] = [
-  student1,
-  student2,
-];
+/* java subject */
+console.log('Java');
+java.teacher = cTeacher;
+console.log(java.getRequirements());
+console.log(java.getAvailableTeacher());
 
-
-// Vanilla JavaScript code to render a table and for each
-//    elements in the array, append a new row to the table
-// Each row should contain the first name of the student and the location
-const table = document.createElement("table");
-const headerRow = document.createElement("tr");
-
-const firstNameHeader = document.createElement("th");
-firstNameHeader.textContent = "First Name";
-
-const locationHeader = document.createElement("th");
-locationHeader.textContent = "Location";
-
-headerRow.appendChild(firstNameHeader);
-headerRow.appendChild(locationHeader);
-
-table.appendChild(headerRow);
-
-studentList.forEach((student) => {
-  const row = document.createElement("tr");
-  
-  const firstNameCell = document.createElement("td");
-  firstNameCell.textContent = student.firstName;
-
-  const locationCell = document.createElement("td");
-  locationCell.textContent = student.location;
-
-  row.appendChild(firstNameCell);
-  row.appendChild(locationCell);
-
-  table.appendChild(row);
-});
-
-document.body.appendChild(table);
+/* react subject */
+console.log('React');
+react.teacher = cTeacher;
+console.log(react.getRequirements());
+console.log(react.getAvailableTeacher());

@@ -1,60 +1,48 @@
-interface Student {
-  firstName: string;
-  lastName: string;
-  age: number;
-  location: string;
+export interface MajorCredits {
+  credits: number;
+  brand: string;
 }
 
-const student1: Student = {
-  firstName: "Jack",
-  lastName: "Smith",
-  age: 34,
-  location: "Hong Kong",
-};
 
-const student2: Student = {
-  firstName: "Katherine",
-  lastName: "McGrath",
-  age: 32,
-  location: "Ireland",
-};
+export interface MinorCredits {
+  credits: number;
+  brand: string;
+}
 
-const studentList: Student[] = [
-  student1,
-  student2,
-];
+function sumMajorCredits(subject1: MajorCredits, subject2: MajorCredits): MajorCredits {
+  return {
+    credits: subject1.credits + subject2.credits
+  } as MajorCredits;
+}
 
 
-// Vanilla JavaScript code to render a table and for each
-//    elements in the array, append a new row to the table
-// Each row should contain the first name of the student and the location
-const table = document.createElement("table");
-const headerRow = document.createElement("tr");
+function sumMinorCredits(subject1: MinorCredits, subject2: MinorCredits): MajorCredits {
+  return {
+    credits: subject1.credits + subject2.credits
+  } as MinorCredits;
+}
 
-const firstNameHeader = document.createElement("th");
-firstNameHeader.textContent = "First Name";
+/* Example usage */
+const mathMajor: MajorCredits = {
+  credits: 5,
+  brand: 'Math Major'
+}
 
-const locationHeader = document.createElement("th");
-locationHeader.textContent = "Location";
+const historyMajor: MajorCredits = {
+  credits: 3,
+  brand: 'History Major'
+}
 
-headerRow.appendChild(firstNameHeader);
-headerRow.appendChild(locationHeader);
 
-table.appendChild(headerRow);
+const mathMinor: MinorCredits = {
+  credits: 1,
+  brand: 'Math Minor'
+}
 
-studentList.forEach((student) => {
-  const row = document.createElement("tr");
-  
-  const firstNameCell = document.createElement("td");
-  firstNameCell.textContent = student.firstName;
+const historyMinor: MinorCredits = {
+  credits: 4,
+  brand: 'History Minor'
+}
 
-  const locationCell = document.createElement("td");
-  locationCell.textContent = student.location;
-
-  row.appendChild(firstNameCell);
-  row.appendChild(locationCell);
-
-  table.appendChild(row);
-});
-
-document.body.appendChild(table);
+console.log(sumMajorCredits(mathMajor, historyMajor));
+console.log(sumMinorCredits(mathMinor, historyMinor));
