@@ -1,7 +1,7 @@
 const fs = require('fs');
 const http = require('http');
 
-const path = process.argv.length > 2 ? process.argv[2] : '';
+const path = process.argv.length > 2 ? process.argv[2] : 'database.csv';
 const host = '0.0.0.0';
 const port = 1245;
 
