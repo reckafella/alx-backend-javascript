@@ -1,12 +1,16 @@
 const fs = require('fs');
 const http = require('http');
 
-const path = process.argv.length > 2 ? process.argv[2] : 'database.csv';
+const path = process.argv.length > 2 ? process.argv[2] : null;
 const host = '0.0.0.0';
 const port = 1245;
 
 async function countStudents(path) {
   return new Promise((resolve, reject) => {
+    if (path === null) {
+      reject(new Error('Cannot load the database'));
+    }
+
     fs.readFile(path, 'utf-8', (error, data) => {
       if (error) {
         reject(new Error('Cannot load the database'));
